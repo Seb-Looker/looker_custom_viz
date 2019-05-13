@@ -81,16 +81,16 @@ convertQueryDatasetToVisData = function(data, queryResponse) {
 
 getHierarchy = function(queryResponse) {
     var hierarchy = [];
-    queryResponse.fields.dimensions.forEach(d => {
-        hierarchy.push(d.label_short);
+    queryResponse.fields.dimension_like.forEach(d => {
+        hierarchy.push(d.name);
     });
     return hierarchy;
 }
 
 getMeasures = function(queryResponse) {
     var measures = [];
-    queryResponse.fields.measures.forEach(d => {
-        measures.push(d.label_short);
+    queryResponse.fields.measure_like.forEach(d => {
+        measures.push(d.name);
     })
     return measures;
 }
