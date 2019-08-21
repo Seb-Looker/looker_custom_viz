@@ -122,12 +122,14 @@ looker.plugins.visualizations.add({
     w = $(element).width();
 
     var graphSettings = {
-      deviceBGImgPath: [
-        "M51.75,54.939h24.311C79.893,54.939,83,51.833,83,48V6.939C83,3.106,79.893,0,76.061,0H6.939 C3.106,0,0,3.106,0,6.939V48c0,3.832,3.106,6.939,6.939,6.939l24.811,0.006v9.587l-3.938,2.265c0,0-0.964,2.142,1.542,2.142h26.021 c0,0,2.083-1.179,1.12-2.142c-0.964-0.964-4.745-2.458-4.745-2.458V54.939z M78,43.223c0,2.052-1.664,3.716-3.716,3.716H8.716 C6.664,46.939,5,45.275,5,43.223V8.655c0-2.052,1.664-3.716,3.716-3.716h65.568C76.336,4.939,78,6.603,78,8.655V43.223z"],
-      deviceWidths: [72], 
-      deviceHeights: [40],
-      devicePadding: [5],
-      deviceMargin: 35,
+      guinnessBGImgPath: [
+        "M51.75,54.939h24.311C79.893,54.939,83,51.833,83,48V6.939C83,3.106,79.893,0,76.061,0H6.939 C3.106,0,0,3.106,0,6.939V48c0,3.832,3.106,6.939,6.939,6.939l24.811,0.006v9.587l-3.938,2.265c0,0-0.964,2.142,1.542,2.142h26.021 c0,0,2.083-1.179,1.12-2.142c-0.964-0.964-4.745-2.458-4.745-2.458V54.939z M78,43.223c0,2.052-1.664,3.716-3.716,3.716H8.716 C6.664,46.939,5,45.275,5,43.223V8.655c0-2.052,1.664-3.716,3.716-3.716h65.568C76.336,4.939,78,6.603,78,8.655V43.223z",
+        "M51.75,54.939h24.311C79.893,54.939,83,51.833,83,48V6.939C83,3.106,79.893,0,76.061,0H6.939 C3.106,0,0,3.106,0,6.939V48c0,3.832,3.106,6.939,6.939,6.939l24.811,0.006v9.587l-3.938,2.265c0,0-0.964,2.142,1.542,2.142h26.021 c0,0,2.083-1.179,1.12-2.142c-0.964-0.964-4.745-2.458-4.745-2.458V54.939z M78,43.223c0,2.052-1.664,3.716-3.716,3.716H8.716 C6.664,46.939,5,45.275,5,43.223V8.655c0-2.052,1.664-3.716,3.716-3.716h65.568C76.336,4.939,78,6.603,78,8.655V43.223z",
+        "M51.75,54.939h24.311C79.893,54.939,83,51.833,83,48V6.939C83,3.106,79.893,0,76.061,0H6.939 C3.106,0,0,3.106,0,6.939V48c0,3.832,3.106,6.939,6.939,6.939l24.811,0.006v9.587l-3.938,2.265c0,0-0.964,2.142,1.542,2.142h26.021 c0,0,2.083-1.179,1.12-2.142c-0.964-0.964-4.745-2.458-4.745-2.458V54.939z M78,43.223c0,2.052-1.664,3.716-3.716,3.716H8.716 C6.664,46.939,5,45.275,5,43.223V8.655c0-2.052,1.664-3.716,3.716-3.716h65.568C76.336,4.939,78,6.603,78,8.655V43.223z",],
+      guinnessWidths: [72, 72, 72], // desktop, mobile, tablet (screen sizes)
+      guinnessHeights: [40, 40, 40],
+      guinnessPadding: [5, 5, 5],
+      guinnessMargin: 35,
     };
 
     var dim = resp.fields.dimensions[0].name,
@@ -145,7 +147,7 @@ looker.plugins.visualizations.add({
       source[i] = Math.round((data[i][mes].value / totalUsers) * 100);
     };
 
-    var svg = d3.select("#devicevis");
+    var svg = d3.select("#guinness");
 
     // Clear the svg
     svg.selectAll("*").remove();
@@ -161,11 +163,11 @@ looker.plugins.visualizations.add({
       .append("g")
       .attr("fill", "#000")
       .attr("transform", function(d, i) {
-        var leftMargin = i === 0 ? 0 : graphSettings.deviceMargin;
+        var leftMargin = i === 0 ? 0 : graphSettings.guinnessMargin;
         var w;
 
         if (i > 0) {
-          w = graphSettings.deviceWidths[i - 1] + (graphSettings.devicePadding[i - 1] * 2) + leftMargin;
+          w = graphSettings.guinnessWidths[i - 1] + (graphSettings.guinnessPadding[i - 1] * 2) + leftMargin;
           xPos += w;
         }
 
@@ -176,13 +178,13 @@ looker.plugins.visualizations.add({
     var rect = groups.append("rect")
       .attr('class', 'bar')
       .attr("x", function(d, i) {
-        return graphSettings.devicePadding[i] + (d3.select(element).node().getBoundingClientRect().width / 2) - 127;
+        return graphSettings.guinnessPadding[i] + (d3.select(element).node().getBoundingClientRect().width / 2) - 127;
       })
       // .attr("y", 5)
       .attr("y", (d3.select(element).node().getBoundingClientRect().height / 2) - 35)
       .attr("width", 0)
       .attr("height", function(d, i) {
-        var h = graphSettings.deviceHeights[i] + 5;
+        var h = graphSettings.guinnessHeights[i] + 5;
 
         return h;
       })
@@ -194,17 +196,17 @@ looker.plugins.visualizations.add({
       .attr("x", (d3.select(element).node().getBoundingClientRect().width / 2) - 127)
       .attr("y", (d3.select(element).node().getBoundingClientRect().height / 2) - 40)
       .attr('id', function(d, i) {
-        return "device-" + i;
+        return "guinness-" + i;
       })
       .attr('patternUnits', 'userSpaceOnUse')
       .attr('width', function(d, i) {
-        var w = graphSettings.deviceWidths[i] + (graphSettings.devicePadding[i] * 2);
+        var w = graphSettings.guinnessWidths[i] + (graphSettings.guinnessPadding[i] * 2);
         return w + 10;
       })
       .attr('height', 300)
       .append("path")
       .attr("d", function(d, i) {
-        return graphSettings.deviceBGImgPath[i];
+        return graphSettings.guinnessBGImgPath[i];
       })
       .attr("fill", "#CCCCCC");
 
@@ -213,7 +215,7 @@ looker.plugins.visualizations.add({
       .attr("x", (d3.select(element).node().getBoundingClientRect().width / 2) - 127)
       .attr("y", (d3.select(element).node().getBoundingClientRect().height / 2) - 40)
       .attr("width", function(d, i) {
-        var w = graphSettings.deviceWidths[i] + (graphSettings.devicePadding[i] * 2);
+        var w = graphSettings.guinnessWidths[i] + (graphSettings.guinnessPadding[i] * 2);
         return w + 10;
       })
       .attr("height", function(d, i) {
@@ -221,7 +223,7 @@ looker.plugins.visualizations.add({
         return 150;
       })
       .style("fill", function(d, i) {
-        var id = "#device-" + i;
+        var id = "#guinness-" + i;
         return 'url(' + id + ')';
       });
 
@@ -240,11 +242,11 @@ looker.plugins.visualizations.add({
         return num + "%";
       })
       .attr("x", function(d, i) {
-        var padding = graphSettings.devicePadding[i];
-        var deviceWidth = graphSettings.deviceWidths[i] + (padding * 2);
+        var padding = graphSettings.guinnessPadding[i];
+        var guinnessWidth = graphSettings.guinnessWidths[i] + (padding * 2);
         var textWidth = d3.select(this).node().getBBox().width;
 
-        return (deviceWidth / 2) - (textWidth / 2) + (d3.select(element).node().getBoundingClientRect().width / 2) - 127;
+        return (guinnessWidth / 2) - (textWidth / 2) + (d3.select(element).node().getBoundingClientRect().width / 2) - 127;
       });
 
     // Animate bars
@@ -255,8 +257,8 @@ looker.plugins.visualizations.add({
       })
       .ease("elastic")
       .attr("width", function(d, i) {
-        //var w = (graphSettings.deviceWidths[i] * d.current.metrics.new_users.percent) / 100;
-        var w = (graphSettings.deviceWidths[i] * source[i]) / 100;
+        //var w = (graphSettings.guinnessWidths[i] * d.current.metrics.new_users.percent) / 100;
+        var w = (graphSettings.guinnessWidths[i] * source[i]) / 100;
         w = isNaN(w) ? 0 : w;
         return w;
       });
