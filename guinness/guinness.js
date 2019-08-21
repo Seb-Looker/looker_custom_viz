@@ -1,5 +1,4 @@
-// Visualisation adapted by Looker based on the work done by Imagination (https://www.imagination.com/)
-// Credit to Imagination Group Limited
+// v0.05
 
 looker.plugins.visualizations.add({
   id: 'guinness',
