@@ -1,4 +1,4 @@
-// v0.06
+// v0.07
 
 looker.plugins.visualizations.add({
   id: 'guinness',
