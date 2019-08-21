@@ -134,16 +134,20 @@ looker.plugins.visualizations.add({
       mes = resp.fields.measures[0].name;
 
 
-    var totalUsers = 0;
-    for (var i = 2; i >= 0; i--) {
-      totalUsers += data[i][mes].value;
-    };
+    // var totalUsers = 0;
+    // for (var i = 2; i >= 0; i--) {
+    //   totalUsers += data[i][mes].value;
+    // };
+
 
     // Create % values
+    // var source = []
+    // for (var i = 2; i >= 0; i--) {
+    //   source[i] = Math.round((data[i][mes].value / totalUsers) * 100);
+    // };
+
     var source = []
-    for (var i = 2; i >= 0; i--) {
-      source[i] = Math.round((data[i][mes].value / totalUsers) * 100);
-    };
+    source[0] = Math.round(data[0][mes].value);
 
     var svg = d3.select("#guinness");
 
@@ -254,11 +258,11 @@ looker.plugins.visualizations.add({
         return i + 1 * 150;
       })
       .ease("elastic")
-      .attr("width", function(d, i) {
+      .attr("height", function(d, i) {
         //var w = (graphSettings.guinnessWidths[i] * d.current.metrics.new_users.percent) / 100;
-        var w = (graphSettings.guinnessWidths[i] * source[i]) / 100;
-        w = isNaN(w) ? 0 : w;
-        return w;
+        var h = (graphSettings.guinnessHeights[i] * source[i]) / 100;
+        h = isNaN(h) ? 0 : h;
+        return h;
       });
 
   }
