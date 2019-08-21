@@ -226,27 +226,27 @@ looker.plugins.visualizations.add({
         return 'url(' + id + ')';
       });
 
-    // Add text
-    groups.append("text")
-      .attr("y", (d3.select(element).node().getBoundingClientRect().height / 2) + 60)
-      .attr("text-anchor", "left");
+    // // Add text
+    // groups.append("text")
+    //   .attr("y", (d3.select(element).node().getBoundingClientRect().height / 2) + 60)
+    //   .attr("text-anchor", "left");
 
 
-    // Add text
-    groups.select("text")
-      .data(source)
-      .text(function(d, i) {
-        var num = source[i];
-        num = isNaN(num) ? 0 : num;
-        return num + "%";
-      })
-      .attr("x", function(d, i) {
-        var padding = graphSettings.guinnessPadding[i];
-        var guinnessWidth = graphSettings.guinnessWidths[i] + (padding * 2);
-        var textWidth = d3.select(this).node().getBBox().width;
+    // // Add text
+    // groups.select("text")
+    //   .data(source)
+    //   .text(function(d, i) {
+    //     var num = source[i];
+    //     num = isNaN(num) ? 0 : num;
+    //     return num + "%";
+    //   })
+    //   .attr("x", function(d, i) {
+    //     var padding = graphSettings.guinnessPadding[i];
+    //     var guinnessWidth = graphSettings.guinnessWidths[i] + (padding * 2);
+    //     var textWidth = d3.select(this).node().getBBox().width;
 
-        return (guinnessWidth / 2) - (textWidth / 2) + (d3.select(element).node().getBoundingClientRect().width / 2) - 127;
-      });
+    //     return (guinnessWidth / 2) - (textWidth / 2) + (d3.select(element).node().getBoundingClientRect().width / 2) - 127;
+    //   });
 
     // Animate bars
     groups.data(source)
