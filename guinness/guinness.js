@@ -183,12 +183,14 @@ looker.plugins.visualizations.add({
       })
       // .attr("y", 5)
       .attr("y", (d3.select(element).node().getBoundingClientRect().height / 2) - 35)
-      .attr("width", 0)
-      .attr("height", function(d, i) {
-        var h = graphSettings.guinnessHeights[i] + 5;
+      // .attr("width", 0)
+      // .attr("height", function(d, i) {
+      //   var h = graphSettings.guinnessHeights[i] + 5;
 
-        return h;
-      })
+      //   return h;
+      // })
+      .attr("width", 90)
+      .attr("height", 0)
       .style("fill", settings.colorRange || ['#808080']);
 
     // Create pattern
@@ -250,30 +252,30 @@ looker.plugins.visualizations.add({
     //     return (guinnessWidth / 2) - (textWidth / 2) + (d3.select(element).node().getBoundingClientRect().width / 2) - 127;
     //   });
 
-    // Animate bars
-    // groups.data(source)
-    //   .select('rect').transition().duration(1000)
-    //   .delay(function(d, i) {
-    //     return i + 1 * 150;
-    //   })
-    //   .ease("elastic")
-    //   .attr("width", function(d, i) {
-    //     //var w = (graphSettings.guinnessWidths[i] * d.current.metrics.new_users.percent) / 100;
-    //     var w = (graphSettings.guinnessWidths[i] * source[i]) / 100;
-    //     w = isNaN(w) ? 0 : h;
-    //     return w;
-    //   })
-      
+    Animate bars
+    groups.data(source)
+      .select('rect').transition().duration(1000)
+      .delay(function(d, i) {
+        return i + 1 * 150;
+      })
+      .ease("elastic")
+      // .attr("width", function(d, i) {
+      //   //var w = (graphSettings.guinnessWidths[i] * d.current.metrics.new_users.percent) / 100;
+      //   var w = (graphSettings.guinnessWidths[i] * source[i]) / 100;
+      //   w = isNaN(w) ? 0 : h;
+      //   return w;
+      // })
+
       // .attr("width", function(d, i) {
       //   var w = graphSettings.guinnessWidths[i] + (graphSettings.guinnessPadding[i] * 2);
       //   return w + 10;
       // })
-      // .attr("height", function(d, i) {
-      //   //var w = (graphSettings.guinnessWidths[i] * d.current.metrics.new_users.percent) / 100;
-      //   var h = (graphSettings.guinnessHeights[i] * source[i]) / 100;
-      //   h = isNaN(h) ? 0 : h;
-      //   return h;
-      // })
+      .attr("height", function(d, i) {
+        //var w = (graphSettings.guinnessWidths[i] * d.current.metrics.new_users.percent) / 100;
+        var h = (graphSettings.guinnessHeights[i] * source[i]) / 100;
+        h = isNaN(h) ? 0 : h;
+        return h;
+      })
       ;
 
   }
