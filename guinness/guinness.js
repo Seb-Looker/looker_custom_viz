@@ -1,4 +1,4 @@
-// v0.05
+// v0.06
 
 looker.plugins.visualizations.add({
   id: 'guinness',
@@ -252,7 +252,7 @@ looker.plugins.visualizations.add({
     //     return (guinnessWidth / 2) - (textWidth / 2) + (d3.select(element).node().getBoundingClientRect().width / 2) - 127;
     //   });
 
-    Animate bars
+    // Animate bars
     groups.data(source)
       .select('rect').transition().duration(1000)
       .delay(function(d, i) {
