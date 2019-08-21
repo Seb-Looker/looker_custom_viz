@@ -19,8 +19,8 @@ looker.plugins.visualizations.add({
     var min_mes, max_mes, min_dim, max_dim, min_piv, max_piv;
     min_mes = 1;
     max_mes = 1;
-    min_dim = 1;
-    max_dim = 1;
+    min_dim = 0;
+    max_dim = 10;
     min_piv = 0;
     max_piv = 0;
 
@@ -257,6 +257,10 @@ looker.plugins.visualizations.add({
         return i + 1 * 150;
       })
       .ease("elastic")
+      .attr("width", function(d, i) {
+        var w = graphSettings.guinnessWidths[i] + (graphSettings.guinnessPadding[i] * 2);
+        return w + 10;
+      })
       .attr("height", function(d, i) {
         //var w = (graphSettings.guinnessWidths[i] * d.current.metrics.new_users.percent) / 100;
         var h = (graphSettings.guinnessHeights[i] * source[i]) / 100;
