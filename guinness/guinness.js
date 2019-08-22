@@ -1,4 +1,6 @@
-// v0.06
+// v0.07
+// https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.13/d3.js
+// https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js
 
 looker.plugins.visualizations.add({
   id: 'guinness',
